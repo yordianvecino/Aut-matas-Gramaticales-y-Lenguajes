@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const colores = {
-    borde: "#0075FF",
+    borde: "#000",
     error: "#bb2929",
     exito: "#1ed12d"
 }
@@ -23,6 +23,10 @@ const Label = styled.label`
     padding: 10px;
     min-height: 40px; 
     cursor: pointer;
+
+    ${props => props.valido === 'false' && css`
+        color: ${colores.error};
+    `}
 `;
 
 const GrupoInput = styled.div`
@@ -33,7 +37,7 @@ const GrupoInput = styled.div`
 const Input = styled.input`
     width: 100%;
     background: #fff;
-    border-radius: 3px;
+    border-radius: 20px;
     height: 45px;
     line-height: 45px;
     padding: 0 40px 0 10px;
@@ -45,6 +49,14 @@ const Input = styled.input`
         outline: none;
         box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
     }
+
+    ${props => props.valido === 'true' && css`
+        border: 3px solid transparent;
+    `}
+
+    ${props => props.valido === 'false' && css`
+        border: 3px solid ${colores.error} !important;
+    `}
 `;
 
 const LeyendaError = styled.p`
@@ -52,6 +64,14 @@ const LeyendaError = styled.p`
     margin-bottom: 0;
     color: ${colores.error};
     display: none;
+
+    ${props => props.valido === 'true' && css`
+        display: none;
+    `}
+
+    ${props => props.valido === 'false' && css`
+        display: block;
+    `}
 `;
 
 const IconValidacion = styled(FontAwesomeIcon)`
@@ -61,6 +81,16 @@ const IconValidacion = styled(FontAwesomeIcon)`
     z-index: 100;
     font-size: 16px;
     opacity: 0;
+
+    ${props => props.valido === 'false' && css`
+        opacity: 1;
+        color: ${colores.error}
+    `}
+
+    ${props => props.valido === 'true' && css`
+        opacity: 1;
+        color: ${colores.exito}
+    `}
 `;
 
 const ContenedorTerminos = styled.div`
@@ -69,6 +99,10 @@ const ContenedorTerminos = styled.div`
     input{
         margin-right: 10px;
     }
+
+    @media (max-width: 800px){
+        grid-column: span 1;
+    }
 `;
 
 const ContenedorBotonCentrado = styled.div`
@@ -76,6 +110,10 @@ const ContenedorBotonCentrado = styled.div`
     flex-direction: column;
     align-items: center;
     grid-column: span 2;
+
+    @media (max-width: 800px){
+        grid-column: span 1;
+    }
 `;
 
 const Boton = styled.button`
@@ -98,7 +136,6 @@ const Boton = styled.button`
 const MensajeExito = styled.p`
     font-size: 14px;
     color: ${colores.exito};
-    display: none;
 `;
 
 const MensajeError = styled.div`
@@ -116,14 +153,15 @@ const MensajeError = styled.div`
     }
 `;
 
-export {Formulario, 
+export {
+    Formulario,
     Label,
-    GrupoInput, 
-    Input, 
-    LeyendaError, 
-    IconValidacion, 
-    ContenedorTerminos, 
-    ContenedorBotonCentrado, 
+    GrupoInput,
+    Input,
+    LeyendaError,
+    IconValidacion,
+    ContenedorTerminos,
+    ContenedorBotonCentrado,
     Boton,
     MensajeExito,
     MensajeError

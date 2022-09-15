@@ -1,18 +1,44 @@
 import React from 'react';
-import {Input, Label, GrupoInput, LeyendaError, IconValidacion} from './../Elementos/Formularios';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Input, Label, GrupoInput, LeyendaError, IconValidacion } from './../Elementos/Formularios';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-const ComponenteInput = () => {
-    return ( 
+const ComponenteInput = ({ estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular }) => {
+    const onChange = (e) => {
+        cambiarEstado({ ...estado, campo: e.target.value });
+    }
+
+    const validacion = () => {
+        if (expresionRegular) {
+            if (expresionRegular.test(estado.campo)) {
+                cambiarEstado({ ...estado, valido: 'true' });
+            } else {
+                cambiarEstado({ ...estado, valido: 'false' });
+            }
+        }
+    }
+
+    return (
         <div>
-          <Label htmlFor="nombre">Nombre del estudiante</Label>
-          <GrupoInput>
-            <Input type="text" placeholder="Nombre del Estudiante" id="nombre" />
-            <IconValidacion icon={faCheckCircle} />
-          </GrupoInput>
-          <LeyendaError>Lorem ipsum dolor ssit amet.</LeyendaError>
+            <Label htmlFor={name} valido={estado.valido}>{label}</Label>
+            <GrupoInput>
+                <Input
+                    type={tipo}
+                    placeholder={placeholder}
+                    id={name}
+                    value={estado.campo}
+                    onChange={onChange}
+                    onKeyUp={validacion}
+                    onBlur={validacion}
+                    valido={estado.valido}
+                />
+                <IconValidacion
+                    icon={estado.valido === 'true' ? faCheckCircle : faTimesCircle}
+                    valido={estado.valido}
+                />
+            </GrupoInput>
+            <LeyendaError valido={estado.valido}>{leyendaError}</LeyendaError>
         </div>
-     );
+    );
 }
- 
+
 export default ComponenteInput;

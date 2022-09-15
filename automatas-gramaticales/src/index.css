@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 *{
   box-sizing: border-box;
@@ -7,8 +8,8 @@
 body {
   font-family: 'Roboto', sans-serif;
   background: rgb(255, 255, 255);  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffffff, #000000);  
-  background: linear-gradient(to right, #ffffff, #000000); 
+  background: -webkit-linear-gradient(to right, #c4c4c4, #000000);  
+  background: linear-gradient(to right, #c4c4c4, #000000); 
 }
 
 code {
@@ -21,4 +22,40 @@ main{
   width: 90%;
   margin: auto;
   padding: 40px;
+}
+
+h2{
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  font-size: 3em;
+  color: #ffffff;
+
+  @media (max-width: 800px){
+    font-size: 2em;
+  }
+}
+
+h2::before{
+  content: attr(data-text);
+  position: absolute;
+  color: #ffffff;
+  width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 4px solid #ffffff;
+  animation: animate 8s linear infinite;
+  filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 50px #fff);
+}
+
+@keyframes animate{
+  0%,10%,100%{
+    width: 0;
+  }
+  70%,90%{
+    width: 100%;
+  }
+}
+
+h2 span{
+  color: #000000;
 }
