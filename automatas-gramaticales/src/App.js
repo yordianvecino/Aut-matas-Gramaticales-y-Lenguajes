@@ -13,9 +13,12 @@ function App() {
     ])
   }
 
+  const titulo = estudiantes.length === 0 ? '' : 'Administrar Estudiantes';
+
   //Funcion para Eliminar
   const eliminarEstudiante = codigo =>{
-    console.log(codigo)
+    const nuevoEstudiante = estudiantes.filter(estudiantes => estudiantes.codigo !== codigo);
+    guardarEstudiante(nuevoEstudiante)
   }
 
   return (
@@ -29,7 +32,7 @@ function App() {
             />
           </div>
           <div className='one-half column'>
-            <h2>Administrar Estudiantes</h2>
+            <h2>{titulo}</h2>
             {estudiantes.map(estudiante => (
               <Estudiante
                 key={estudiante.codigo}

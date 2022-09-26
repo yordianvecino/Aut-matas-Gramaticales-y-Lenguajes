@@ -11,7 +11,7 @@ const Estudiante = ({estudiante, eliminarEstudiante}) => (
         <p>Correo: <span>{estudiante.correo.campo}</span></p>
         <button
             className="button eliminar u-full-width"
-            onClick={() => eliminarEstudiante(estudiante)}
+            onClick={() => eliminarEstudiante(estudiante.codigo)}
         >Eliminar &times;</button>
     </main>
 );
