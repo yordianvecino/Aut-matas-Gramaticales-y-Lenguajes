@@ -19,6 +19,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Fab from '@mui/material/Fab';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import { saveAs } from 'file-saver';
 
 function App() {
 
@@ -78,6 +79,26 @@ function App() {
     setValue(newValue);
   };
 
+  function downloadJSON(data) {
+    var blob = new Blob([JSON.stringify(estudiantes)], { type: "" });
+    saveAs(blob, "Automatas-Gramaticales.json");
+  }
+
+  const downloadTXT = (data) => {
+    const blob = new Blob([JSON.stringify(estudiantes)], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'Automatas-Gramaticale.txt');
+  }
+
+  const downloadXML = (data) => {
+    const blob = new Blob([JSON.stringify(estudiantes)], { type: 'data:text/xml;charset=utf-8' });
+    saveAs(blob, 'Automatas-Gramaticale.xml');
+  }
+
+  const downloadEXCEL = (data) => {
+    const blob = new Blob([estudiantes], { type: 'data:text/xml;charset=utf-8' });
+    saveAs(blob, 'Automatas-Gramaticale.xlsx');
+  }
+
   return (
     <Fragment>
       <h2 data-text="&nbsp;♠️ Datos Del Estudiante ♣️&nbsp;">&nbsp;♠️ <span>Datos </span>Del<span> Estudiante</span> ♣️</h2>
@@ -125,19 +146,19 @@ function App() {
                   </TableBody>
                 </Table>
                 <BottomNavigation sx={{ width: 1120 }} value={value} onChange={handleChange}>
-                  <Fab variant="extended" sx={{ mr: 2 }}>
+                  <Fab variant="extended" sx={{ mr: 2 }} onClick={downloadTXT}>
                     <GetAppIcon sx={{ mr: 1 }} />
                     Exportar Texto
                   </Fab>
-                  <Fab variant="extended" sx={{ mr: 2 }}>
+                  <Fab variant="extended" sx={{ mr: 2 }} onClick={downloadEXCEL}>
                     <GetAppIcon sx={{ mr: 1 }} />
                     Exportar Excel
                   </Fab>
-                  <Fab variant="extended" sx={{ mr: 2 }}>
+                  <Fab variant="extended" sx={{ mr: 2 }} onClick={downloadXML}>
                     <GetAppIcon sx={{ mr: 1 }} />
                     Exportar XML
                   </Fab>
-                  <Fab variant="extended">
+                  <Fab variant="extended" onClick={downloadJSON}>
                     <GetAppIcon sx={{ mr: 1 }} />
                     Exportar JSON
                   </Fab>
