@@ -1,4 +1,7 @@
 import React from 'react'
+import ExportExcel from 'react-export-excel';
+import {CSVLink} from 'react-csv';
+
 
 const Estudiante = ({estudiante, eliminarEstudiante}) => (
     <main className="estudiante">
