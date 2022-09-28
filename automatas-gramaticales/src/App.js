@@ -12,11 +12,11 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+// import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+// import FolderIcon from '@mui/icons-material/Folder';
+// import RestoreIcon from '@mui/icons-material/Restore';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Fab from '@mui/material/Fab';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { saveAs } from 'file-saver';
@@ -36,7 +36,9 @@ function App() {
     } else {
       localStorage.setItem('estudiante', JSON.stringify([]));
     }
-  }, [estudiantes]);
+  });
+
+  // , [estudiantes]
 
   const crearEstudiante = estudiante => {
     guardarEstudiante([
@@ -94,8 +96,9 @@ function App() {
     saveAs(blob, 'Automatas-Gramaticale.xml');
   }
 
+  
   const downloadEXCEL = (data) => {
-    const blob = new Blob([estudiantes], { type: 'data:text/xml;charset=utf-8' });
+    const blob = new Blob([estudiantes], { type: 'application/vnd.ms-excel;charset=utf-8' });
     saveAs(blob, 'Automatas-Gramaticale.xlsx');
   }
 
