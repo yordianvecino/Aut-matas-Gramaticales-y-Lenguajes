@@ -19,9 +19,11 @@ const Campos = ({crearEstudiante}) => {
     usuario: /^[a-zA-Z0-9_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     codigo: /^\d{8}$/, // 4 a 12 digitos.
-    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
+    fecha: /^\d{4}([-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/,
+    direccion: /[a-zA-Z0-9#-]/,
     telefono_fi: /^\d{7}$/, // 7 numeros.
-    telefono_Ce: /^\d{10}$/ // 14 numeros.
+    telefono_Ce: /^[3][0-9]{9}$/, // 14 numeros.
+    correo: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
   }
 
   const onChangeTerminos = (e) => {
@@ -53,8 +55,6 @@ const Campos = ({crearEstudiante}) => {
     } else {
       cambiarFormularioValido(false);
     }
-
-    crearEstudiante({usuario, codigo, fecha, direcion, telefono_f, telefono_C, correo})
   }
 
   return (
@@ -88,7 +88,7 @@ const Campos = ({crearEstudiante}) => {
             placeholder="Ingrese su fecha"
             name="fecha"
             leyendaError="En este campo solo puede agregar numeros."
-            expresionRegular={expresiones.usuario}
+            expresionRegular={expresiones.fecha}
           />
           <Input
             estado={direcion}
@@ -98,7 +98,7 @@ const Campos = ({crearEstudiante}) => {
             placeholder="Ingrese su dirección"
             name="direccion"
             leyendaError="En este campo solo puede manejar letras, dígitos y los signos especiales # y –."
-            expresionRegular={expresiones.usuario}
+            expresionRegular={expresiones.direccion}
           />
           <Input
             estado={telefono_f}
