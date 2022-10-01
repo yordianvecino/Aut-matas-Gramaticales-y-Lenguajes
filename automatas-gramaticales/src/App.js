@@ -96,7 +96,7 @@ function App() {
     saveAs(blob, 'Automatas-Gramaticale.xml');
   }
 
-
+  
   const downloadEXCEL = (data) => {
     const blob = new Blob([JSON.estudiantes], { type: 'application/vnd.ms-excel;charset=utf-8' });
     saveAs(blob, 'Automatas-Gramaticale.xlsx');
@@ -113,8 +113,8 @@ function App() {
             />
           </div>
           <div className='one-half column'>
+            <h2>{titulo}</h2>
             <main>
-              <h2>{titulo}</h2>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                   <TableHead>
